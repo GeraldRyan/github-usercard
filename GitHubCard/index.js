@@ -71,18 +71,17 @@ function createCard(obj){
   nameElement.textContent = obj.name
   username = crEl('p', 'username')
   username.textContent = obj.login
-  locationElement = crEl('p')
-  locationElement.textContent = obj.location
-  profile = crEl('p')
-  // profile.textContent = obj.public_repos
-  aTag = crEl('a')
+  locationElement = crEl('p', "", "Location: ")
+  locationElement.textContent += obj.location
+  profile = crEl('p', "", "Profile: ")
+  aTag = crEl('a', "", obj.html_url)
   aTag.setAttribute('href', obj.html_url)
-  followers = crEl('p')
-  followers.textContent = obj.followers
-  following = crEl('p')
-  following.textContent = obj.following
-  bio = crEl('p')
-  bio.textContent = obj.bio
+  followers = crEl('p', "", "Followers: ")
+  followers.textContent += obj.followers
+  following = crEl('p', "", "Following: ")
+  following.textContent += obj.following
+  bio = crEl('p', "", "Bio: ")
+  bio.textContent += obj.bio
 
 cardDiv.appendChild(img), cardDiv.appendChild(cardInfo)
 cardInfo.appendChild(nameElement),cardInfo.appendChild(username),cardInfo.appendChild(locationElement)
