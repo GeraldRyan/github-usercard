@@ -52,23 +52,25 @@ const followersArray = [];
 </div>
 */
 
-el = document.createElement('div').set
 
 
 
-function createComponent(obj){
+
+function createCard(obj){
   cardDiv = crEl('div','card')
   img = crEl('img')
-  // img.setAttribute(src, obj.something)
+  // img.setAttribute('src', obj.something)
   cardInfo = crEl('div','card-info')
-  name = crEl('h3','name')
-  // name.textContent = obj.something
+  nameElement = crEl('h3','name')
+  // nameElement.textContent = obj.something
   username = crEl('p', 'username')
   // username.textContent = obj.something
-  location = crEl('p')
-  // location.textContent = obj.something
+  locationElement = crEl('p')
+  // locationElement.textContent = obj.something
   profile = crEl('p')
   // profile.textContent = obj.something
+  aTag = crEl('a')
+  // aTag.setAttribute('href', obj.something)
   followers = crEl('p')
   // followers.textContent = obj.something
   following = crEl('p')
@@ -76,11 +78,16 @@ function createComponent(obj){
   bio = crEl('p')
   // bio.textContent = obj.something
 
-
-  return;
+cardDiv.appendChild(img), cardDiv.appendChild(cardInfo)
+cardInfo.appendChild(nameElement),cardInfo.appendChild(username),cardInfo.appendChild(locationElement)
+cardInfo.appendChild(profile),cardInfo.appendChild(followers),cardInfo.appendChild(following),cardInfo.appendChild(bio)
+profile.appendChild(aTag)
+  return cardDiv;
 }
 
+mySampleCard = createCard('this')
 
+console.log(mySampleCard)
 
 /* List of LS Instructors Github username's: 
   tetondan
