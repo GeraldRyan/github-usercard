@@ -3,6 +3,13 @@
            https://api.github.com/users/<your name>
 */
 
+
+myGit = axios.get("https://api.github.com/users/webbuildermn")
+console.log(myGit)
+
+
+
+
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function 
@@ -43,8 +50,37 @@ const followersArray = [];
     <p>Bio: {users bio}</p>
   </div>
 </div>
-
 */
+
+el = document.createElement('div').set
+
+
+
+function createComponent(obj){
+  cardDiv = crEl('div','card')
+  img = crEl('img')
+  // img.setAttribute(src, obj.something)
+  cardInfo = crEl('div','card-info')
+  name = crEl('h3','name')
+  // name.textContent = obj.something
+  username = crEl('p', 'username')
+  // username.textContent = obj.something
+  location = crEl('p')
+  // location.textContent = obj.something
+  profile = crEl('p')
+  // profile.textContent = obj.something
+  followers = crEl('p')
+  // followers.textContent = obj.something
+  following = crEl('p')
+  // following.textContent = obj.something
+  bio = crEl('p')
+  // bio.textContent = obj.something
+
+
+  return;
+}
+
+
 
 /* List of LS Instructors Github username's: 
   tetondan
@@ -53,3 +89,15 @@ const followersArray = [];
   luishrd
   bigknell
 */
+
+
+
+
+function crEl(tag, cl="", txt="" ){
+  el = document.createElement(tag)
+  if (cl !=""){el.classList.add(cl)}
+  el.textContent = txt
+  return el
+
+}
+
