@@ -4,15 +4,26 @@
 */
 
 
+let peeps = ["webbuildermn","LeesahMasko","northdacoder","vtopham", "onelonecoder","sampattuzzi", "josiebigler", "3b1b","BenTristem","sid2015980", "tetondan","dustinmyers","justsml","luishrd","bigknell"]
+
+peeps.forEach(function cb(element){
 
 
-axios.get("https://api.github.com/users/webbuildermn")
-.then( function (response) {
-  // console.log(response.data)
-  console.log(response.data)
-  document.querySelector('.cards').appendChild(createCard(response.data))
-  
+  axios.get(`https://api.github.com/users/${element}`)
+  .then( function (response) {
+    console.log(response.data)
+    document.querySelector('.cards').appendChild(createCard(response.data))
+  })
+
 })
+
+
+// axios.get("https://api.github.com/users/webbuildermn")
+// .then( function (response) {
+//   console.log(response.data)
+//   document.querySelector('.cards').appendChild(createCard(response.data))
+  
+// })
 
 
 
