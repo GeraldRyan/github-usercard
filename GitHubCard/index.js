@@ -4,9 +4,15 @@
 */
 
 
-myGit = axios.get("https://api.github.com/users/webbuildermn")
-console.log(myGit)
 
+
+axios.get("https://api.github.com/users/webbuildermn")
+.then( function (response) {
+  // console.log(response.data)
+  console.log(response.data)
+  document.querySelector('.cards').appendChild(createCard(response.data))
+  
+})
 
 
 
@@ -59,24 +65,24 @@ const followersArray = [];
 function createCard(obj){
   cardDiv = crEl('div','card')
   img = crEl('img')
-  // img.setAttribute('src', obj.something)
+  img.setAttribute('src', obj.avatar_url)
   cardInfo = crEl('div','card-info')
   nameElement = crEl('h3','name')
-  // nameElement.textContent = obj.something
+  nameElement.textContent = obj.name
   username = crEl('p', 'username')
-  // username.textContent = obj.something
+  username.textContent = obj.login
   locationElement = crEl('p')
-  // locationElement.textContent = obj.something
+  locationElement.textContent = obj.location
   profile = crEl('p')
-  // profile.textContent = obj.something
+  // profile.textContent = obj.public_repos
   aTag = crEl('a')
-  // aTag.setAttribute('href', obj.something)
+  aTag.setAttribute('href', obj.html_url)
   followers = crEl('p')
-  // followers.textContent = obj.something
+  followers.textContent = obj.followers
   following = crEl('p')
-  // following.textContent = obj.something
+  following.textContent = obj.following
   bio = crEl('p')
-  // bio.textContent = obj.something
+  bio.textContent = obj.bio
 
 cardDiv.appendChild(img), cardDiv.appendChild(cardInfo)
 cardInfo.appendChild(nameElement),cardInfo.appendChild(username),cardInfo.appendChild(locationElement)
@@ -85,9 +91,8 @@ profile.appendChild(aTag)
   return cardDiv;
 }
 
-mySampleCard = createCard('this')
+// Temp Test Code
 
-console.log(mySampleCard)
 
 /* List of LS Instructors Github username's: 
   tetondan
@@ -99,7 +104,7 @@ console.log(mySampleCard)
 
 
 
-
+// Helper Function
 function crEl(tag, cl="", txt="" ){
   el = document.createElement(tag)
   if (cl !=""){el.classList.add(cl)}
