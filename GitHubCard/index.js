@@ -26,58 +26,64 @@ peeps.forEach(function cb(element) {
             .then(function(response) {
                 // console.log(response.data)
                 // const arrayOfFollowing = []
-                const followingAPIUrl = response.data.following_url.replace("{/other_user}", "")
-                    // console.log(followingAPIUrl)
-                const following = axios.get(followingAPIUrl)
-                    .then(function(response) {
-                        const arrayOfFollowing = makeFollowingArray(response.data)
-                            // console.log(response)
-                        console.log(arrayOfFollowing)
-                        console.log("\n\n\n\n")
-                        return arrayOfFollowing
-                    })
 
 
                 document.querySelector('.cards').appendChild(createCard(response.data))
-                document.querySelector(`.${response.data.login}`).addEventListener('dblclick', 
-                function() {
-                    console.log(`U double clicked on ${response.data.login}`)
-                    this.style.backgroundColor = 'green'
+                document.querySelector(`.${response.data.login}`).addEventListener('dblclick',
+                    function() {
+                        console.log(`U double clicked on ${response.data.login}`)
+                        this.style.backgroundColor = 'green'
+                        document.querySelector('.cards').innerHTML = "" //Not successful
+                            //THE STRETCH PAYLOAD GOETH HERE
+                        const followingAPIUrl = response.data.following_url.replace("{/other_user}", "")
+                            // console.log(followingAPIUrl)
+                        const following = axios.get(followingAPIUrl)
+                            .then(function(response) {
+                                const arrayOfFollowing = makeFollowingArray(response.data)
 
-                    //THE STRETCH PAYLOAD GOETH HERE
+                                console.log(arrayOfFollowing)
+                                console.log("\n\n\n\n")
 
-                    // //pseudo coding it up, 2 things we need.
-                    // when they double click we refresh the page, or if not technically, 
-                    // we destroy the other objects, all other cards.
-                    // then we redeploy with the new cards who are their followers. We have to make a new call from the array
-                    // console.log(arrayOfFollowing)
-                    // document.getElementsByClassName('card').style.display = 'none'
-                    // document.querySelectorAll('.card').style.display = 'none'
-                    hideAll
-                    // this.style.display= "none"
-                    // axios.get(`https://api.github.com/users/${element}`)
-                    this.parentNode.removeChild(this)
-                    following.forEach(function(element){
-                      axios.get(`https://api.github.com/users/${element}`)
-                      .then(function (response){
-                        console.log('yippee')
-                      })
+                                if (arrayOfFollowing.length === 0) {
+                                    document.querySelector('.cards').appendChild(lonely())
+                                }
+                                arrayOfFollowing.forEach(function(element) {
+                                    axios.get(`https://api.github.com/users/${element}`)
+                                        .then(function cb(response) {
+                                            document.querySelector('.cards').appendChild(createCard(response.data))
+                                            console.log('yippee')
+
+                                        })
+
+                                })
+
+                            })
+
+
+                        // this.parentNode.removeChild(this)
+
+
+
+
+                        // //pseudo coding it up, 2 things we need.
+                        // when they double click we refresh the page, or if not technically, 
+                        // we destroy the other objects, all other cards.
+                        // then we redeploy with the new cards who are their followers. We have to make a new call from the array
+                        // console.log(arrayOfFollowing)
+                        // document.getElementsByClassName('card').style.display = 'none'
+                        // document.querySelectorAll('.card').style.display = 'none'
+                        // this.style.display= "none"
+                        // axios.get(`https://api.github.com/users/${element}`)
+
+                        // GRANT SANDERSON 3B1B DOESN'T THINK I'M CLICKING ON HIM!!!!! ANOTHER ANOMALY
+                        // It says '3b1b is not a valid selector at the top
+                        // Well I failed to remove element. Let's see if I can append at least
 
                     })
-                    // GRANT SANDERSON 3B1B DOESN'T THINK I'M CLICKING ON HIM!!!!! ANOTHER ANOMALY
-                    // It says '3b1b is not a valid selector at the top
-                    // Well I failed to remove element. Let's see if I can append at least
-
-                })
             })
     })
     // TEST CODE FOR STRETCH
 
-
-function hideAll(){
-  document.querySelectorAll('.card').style.display = 'none'
-  
-}
 
 
 
@@ -91,6 +97,11 @@ function makeFollowingArray(data) {
     return returnValue
 }
 
+function lonely() {
+    cardDiv = crEl('div', 'card', "Wow, it sure is lonely in here")
+    cardDiv.style.fontSize = "4rem"
+    return cardDiv
+}
 
 
 
