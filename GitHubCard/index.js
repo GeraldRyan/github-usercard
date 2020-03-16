@@ -40,6 +40,9 @@ peeps.forEach(function cb(element) {
                 document.querySelector('.cards').appendChild(createCard(response.data))
                 document.querySelector(`.${response.data.login}`).addEventListener('dblclick', function() {
                     console.log(`U double clicked on ${response.data.login}`)
+                    this.style.backgroundColor = 'green'
+
+
                 })
             })
     })
