@@ -27,27 +27,30 @@ peeps.forEach(function cb(element) {
                 // console.log(response.data)
                 // const arrayOfFollowing = []
                 const followingAPIUrl = response.data.following_url.replace("{/other_user}", "")
-                // console.log(followingAPIUrl)
+                    // console.log(followingAPIUrl)
                 axios.get(followingAPIUrl)
                     .then(function(response) {
-                      const arrayOfFollowing = makeFollowingArray(response.data)
-                        // console.log(response)
+                        const arrayOfFollowing = makeFollowingArray(response.data)
+                            // console.log(response)
                         console.log(arrayOfFollowing)
                         console.log("\n\n\n\n")
                     })
 
 
                 document.querySelector('.cards').appendChild(createCard(response.data))
+                document.querySelector(`.${response.data.login}`).addEventListener('dblclick', function() {
+                    console.log(`U double clicked on ${response.data.login}`)
+                })
             })
     })
     // TEST CODE FOR STRETCH
 
 
 function makeFollowingArray(data) {
-  const returnValue = []
+    const returnValue = []
     for (const prop in data) {
         returnValue.push(data[prop].login)
-        // console.log(data[prop].login)
+            // console.log(data[prop].login)
     }
     // console.log("\n\n\n\n\n")
     return returnValue
@@ -137,6 +140,8 @@ function createCard(obj) {
     cardInfo.appendChild(nameElement), cardInfo.appendChild(username), cardInfo.appendChild(locationElement)
     cardInfo.appendChild(profile), cardInfo.appendChild(followers), cardInfo.appendChild(following), cardInfo.appendChild(bio)
     profile.appendChild(aTag)
+
+
     return cardDiv;
 }
 
